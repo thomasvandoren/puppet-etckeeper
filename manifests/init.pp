@@ -21,7 +21,7 @@
 #
 # === Copyright
 #
-# Copyright 2012, Cozi Group, Inc., unless otherwise noted
+# Copyright 2012, Thomas Van Doren, unless otherwise noted
 #
 class etckeeper {
   # HIGHLEVEL_PACKAGE_MANAGER config setting.
