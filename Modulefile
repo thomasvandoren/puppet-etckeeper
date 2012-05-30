@@ -1,0 +1,5 @@
+name         'thomasvandoren-etckeeper'
+version      '0.0.1'
+author       'Thomas Van Doren'
+license      'GPLv2'
+project_page 'https://github.com/thomasvandoren/puppet-etckeeper'
