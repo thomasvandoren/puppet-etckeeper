@@ -45,6 +45,9 @@ class etckeeper {
                  File['etckeeper.conf'],
                  ],
   }
+  file { '/etc/etckeeper':
+    ensure => directory,
+  }
   file { 'etckeeper.conf':
     ensure  => present,
     path    => '/etc/etckeeper/etckeeper.conf',
