@@ -56,4 +56,10 @@ class etckeeper {
     mode    => '0644',
     content => template('etckeeper/etckeeper.conf.erb'),
   }
+  exec { 'etckeeper-init':
+    command => '/usr/bin/etckeeper init',
+    cwd     => '/etc',
+    creates => '/etc/.git',
+    require => [ Package['git'], Package['etckeeper'], ],
+  }
 }
