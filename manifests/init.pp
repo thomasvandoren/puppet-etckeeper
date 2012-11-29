@@ -47,6 +47,7 @@ class etckeeper {
   }
   file { '/etc/etckeeper':
     ensure => directory,
+    mode   => 0755,
   }
   file { 'etckeeper.conf':
     ensure  => present,
