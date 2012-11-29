@@ -43,7 +43,11 @@ class etckeeper {
   Package {
     ensure => present,
   }
-  package { $gitpackage: }
+
+  if !defined(Package[$gitpackage]) {
+    package { $gitpackage: }
+  }
+
   package { 'etckeeper':
     require => [ Package[$gitpackage], File['etckeeper.conf'], ],
   }
