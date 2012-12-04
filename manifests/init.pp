@@ -36,19 +36,34 @@ class etckeeper {
     /(?i-mx:centos|fedora|redhat)/ => 'rpm',
   }
 
+  $gitpackage = $operatingsystem ? {
+    /(?i-mx:ubuntu|debian)/        => 'git-core',
+    /(?i-mx:centos|fedora|redhat)/ => 'git',
+  }
+
+  $etckeeper_binary = $operatingsystem ? {
+    /(?i-mx:ubuntu|debian)/        => '/usr/sbin/etckeeper',
+    /(?i-mx:centos|fedora|redhat)/ => '/usr/bin/etckeeper',
+  }
+
+
   Package {
     ensure => present,
   }
-  package { 'git': }
-  package { 'etckeeper':
-    require => [ Package['git'],
-                 File['etckeeper.conf'],
-                 ],
+
+  if !defined(Package[$gitpackage]) {
+    package { $gitpackage: }
   }
+
+  package { 'etckeeper':
+    require => [ Package[$gitpackage], File['etckeeper.conf'], ],
+  }
+
   file { '/etc/etckeeper':
     ensure => directory,
     mode   => 0755,
   }
+
   file { 'etckeeper.conf':
     ensure  => present,
     path    => '/etc/etckeeper/etckeeper.conf',
@@ -57,10 +72,11 @@ class etckeeper {
     mode    => '0644',
     content => template('etckeeper/etckeeper.conf.erb'),
   }
+
   exec { 'etckeeper-init':
-    command => '/usr/bin/etckeeper init',
+    command => "${etckeeper_binary} init",
     cwd     => '/etc',
     creates => '/etc/.git',
-    require => [ Package['git'], Package['etckeeper'], ],
+    require => [ Package[$gitpackage], Package['etckeeper'], ],
   }
 }
