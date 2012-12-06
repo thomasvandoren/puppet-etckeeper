@@ -46,7 +46,6 @@ class etckeeper {
     /(?i-mx:centos|fedora|redhat)/ => '/usr/bin/etckeeper',
   }
 
-
   Package {
     ensure => present,
   }
@@ -61,7 +60,7 @@ class etckeeper {
 
   file { '/etc/etckeeper':
     ensure => directory,
-    mode   => 0755,
+    mode   => '0755',
   }
 
   file { 'etckeeper.conf':
