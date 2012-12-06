@@ -1,6 +1,9 @@
 etckeeper module for puppet
 ===========================
 
+Use puppetlabs_spec_helper gem.
+Add spec tests.
+
 0.0.4
 -----
 Create /etc/etckeeper with mode 0755. - @cpick
