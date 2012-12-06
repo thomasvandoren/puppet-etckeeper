@@ -32,13 +32,13 @@ class etckeeper {
 
   # LOWLEVEL_PACKAGE_MANAGER config setting.
   $etckeeper_low_pkg_mgr = $operatingsystem ? {
-    /(?i-mx:ubuntu|debian)/        => 'dpkg',
-    /(?i-mx:centos|fedora|redhat)/ => 'rpm',
+    /(?i-mx:ubuntu|debian)/                    => 'dpkg',
+    /(?i-mx:centos|fedora|redhat|oraclelinux)/ => 'rpm',
   }
 
   $gitpackage = $operatingsystem ? {
-    /(?i-mx:ubuntu|debian)/        => 'git-core',
-    /(?i-mx:centos|fedora|redhat)/ => 'git',
+    /(?i-mx:ubuntu|debian)/                    => 'git-core',
+    /(?i-mx:centos|fedora|redhat|oraclelinux)/ => 'git',
   }
 
   Package {
