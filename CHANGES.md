@@ -1,6 +1,10 @@
 etckeeper module for puppet
 ===========================
 
+0.0.5
+-----
+Fix etckeeper init call for Ubuntu >= 11.10. - @sedden
+
 0.0.4
 -----
 Create /etc/etckeeper with mode 0755. - @cpick
