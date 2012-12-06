@@ -41,12 +41,6 @@ class etckeeper {
     /(?i-mx:centos|fedora|redhat)/ => 'git',
   }
 
-  $etckeeper_binary = $operatingsystem ? {
-    /(?i-mx:ubuntu|debian)/        => '/usr/sbin/etckeeper',
-    /(?i-mx:centos|fedora|redhat)/ => '/usr/bin/etckeeper',
-  }
-
-
   Package {
     ensure => present,
   }
@@ -74,7 +68,8 @@ class etckeeper {
   }
 
   exec { 'etckeeper-init':
-    command => "${etckeeper_binary} init",
+    command => 'etckeeper init',
+    path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
     cwd     => '/etc',
     creates => '/etc/.git',
     require => [ Package[$gitpackage], Package['etckeeper'], ],
