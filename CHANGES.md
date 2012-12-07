@@ -1,6 +1,10 @@
 etckeeper module for puppet
 ===========================
 
+0.0.6
+-----
+Add support for Oracle Linux Server 6. - @sedden
+
 0.0.5
 -----
 Fix etckeeper init call for Ubuntu >= 11.10. - @sedden
