@@ -26,8 +26,8 @@
 class etckeeper {
   # HIGHLEVEL_PACKAGE_MANAGER config setting.
   $etckeeper_high_pkg_mgr = $operatingsystem ? {
-    /(?i-mx:ubuntu|debian)/        => 'apt',
-    /(?i-mx:centos|fedora|redhat)/ => 'yum',
+    /(?i-mx:ubuntu|debian)/                    => 'apt',
+    /(?i-mx:centos|fedora|redhat|oraclelinux)/ => 'yum',
   }
 
   # LOWLEVEL_PACKAGE_MANAGER config setting.
