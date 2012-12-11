@@ -50,12 +50,13 @@ class etckeeper {
   }
 
   package { 'etckeeper':
-    require => [ Package[$gitpackage], File['etckeeper.conf'], ],
+    require => Package[$gitpackage],
   }
 
   file { '/etc/etckeeper':
-    ensure => directory,
-    mode   => 0755,
+    ensure  => directory,
+    mode    => 0755,
+    require => Package['etckeeper'],
   }
 
   file { 'etckeeper.conf':
@@ -65,6 +66,7 @@ class etckeeper {
     group   => root,
     mode    => '0644',
     content => template('etckeeper/etckeeper.conf.erb'),
+    require => [ Package['etckeeper'], File['/etc/etckeeper'] ],
   }
 
   exec { 'etckeeper-init':
@@ -72,6 +74,6 @@ class etckeeper {
     path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
     cwd     => '/etc',
     creates => '/etc/.git',
-    require => [ Package[$gitpackage], Package['etckeeper'], ],
+    require => [ Package[$gitpackage], Package['etckeeper'], File['etckeeper.conf'] ],
   }
 }
