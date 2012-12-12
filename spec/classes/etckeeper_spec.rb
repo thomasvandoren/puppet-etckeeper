@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'etckeeper', :type => 'class' do
-  context "On a Debian OS" do
+  context "On an Ubuntu OS" do
     let :facts do
       {
         :osfamily        => 'Debian',
@@ -58,6 +58,34 @@ describe 'etckeeper', :type => 'class' do
                                                  :cwd     => '/etc',
                                                  :path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
                                                  :creates => '/etc/.git')
+    end # it
+  end # context
+
+  context "On a Debian OS" do
+    let :facts do
+      {
+        :operatingsystem => 'Debian'
+      }
+    end # let
+
+    it do
+      should contain_package('git-core').with_ensure('present')
+      should contain_file('etckeeper.conf').with_content(/^HIGHLEVEL_PACKAGE_MANAGER=apt$/)
+      should contain_file('etckeeper.conf').with_content(/^LOWLEVEL_PACKAGE_MANAGER=dpkg$/)
+    end # it
+  end # context
+
+  context "On an Oracle Server 6 OS" do
+    let :facts do
+      {
+        :operatingsystem => 'oraclelinux'
+      }
+    end # let
+
+    it do
+      should contain_package('git').with_ensure('present')
+      should contain_file('etckeeper.conf').with_content(/^HIGHLEVEL_PACKAGE_MANAGER=yum$/)
+      should contain_file('etckeeper.conf').with_content(/^LOWLEVEL_PACKAGE_MANAGER=rpm$/)
     end # it
   end # context
 end # describe
