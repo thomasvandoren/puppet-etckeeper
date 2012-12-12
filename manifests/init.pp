@@ -26,24 +26,19 @@
 class etckeeper {
   # HIGHLEVEL_PACKAGE_MANAGER config setting.
   $etckeeper_high_pkg_mgr = $operatingsystem ? {
-    /(?i-mx:ubuntu|debian)/        => 'apt',
-    /(?i-mx:centos|fedora|redhat)/ => 'yum',
+    /(?i-mx:ubuntu|debian)/                    => 'apt',
+    /(?i-mx:centos|fedora|redhat|oraclelinux)/ => 'yum',
   }
 
   # LOWLEVEL_PACKAGE_MANAGER config setting.
   $etckeeper_low_pkg_mgr = $operatingsystem ? {
-    /(?i-mx:ubuntu|debian)/        => 'dpkg',
-    /(?i-mx:centos|fedora|redhat)/ => 'rpm',
+    /(?i-mx:ubuntu|debian)/                    => 'dpkg',
+    /(?i-mx:centos|fedora|redhat|oraclelinux)/ => 'rpm',
   }
 
   $gitpackage = $operatingsystem ? {
-    /(?i-mx:ubuntu|debian)/        => 'git-core',
-    /(?i-mx:centos|fedora|redhat)/ => 'git',
-  }
-
-  $etckeeper_binary = $operatingsystem ? {
-    /(?i-mx:ubuntu|debian)/        => '/usr/sbin/etckeeper',
-    /(?i-mx:centos|fedora|redhat)/ => '/usr/bin/etckeeper',
+    /(?i-mx:ubuntu|debian)/                    => 'git-core',
+    /(?i-mx:centos|fedora|redhat|oraclelinux)/ => 'git',
   }
 
   Package {
@@ -73,7 +68,8 @@ class etckeeper {
   }
 
   exec { 'etckeeper-init':
-    command => "${etckeeper_binary} init",
+    command => 'etckeeper init',
+    path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
     cwd     => '/etc',
     creates => '/etc/.git',
     require => [ Package[$gitpackage], Package['etckeeper'], ],
