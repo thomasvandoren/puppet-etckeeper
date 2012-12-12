@@ -24,8 +24,9 @@ describe 'etckeeper', :type => 'class' do
       should contain_file('etckeeper.conf').with_content(/^HIGHLEVEL_PACKAGE_MANAGER=apt$/)
       should contain_file('etckeeper.conf').with_content(/^LOWLEVEL_PACKAGE_MANAGER=dpkg$/)
 
-      should contain_exec('etckeeper-init').with(:command => '/usr/sbin/etckeeper init',
+      should contain_exec('etckeeper-init').with(:command => 'etckeeper init',
                                                  :cwd     => '/etc',
+                                                 :path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
                                                  :creates => '/etc/.git')
     end # it
   end # context
@@ -53,8 +54,9 @@ describe 'etckeeper', :type => 'class' do
       should contain_file('etckeeper.conf').with_content(/^HIGHLEVEL_PACKAGE_MANAGER=yum$/)
       should contain_file('etckeeper.conf').with_content(/^LOWLEVEL_PACKAGE_MANAGER=rpm$/)
 
-      should contain_exec('etckeeper-init').with(:command => '/usr/bin/etckeeper init',
+      should contain_exec('etckeeper-init').with(:command => 'etckeeper init',
                                                  :cwd     => '/etc',
+                                                 :path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
                                                  :creates => '/etc/.git')
     end # it
   end # context
