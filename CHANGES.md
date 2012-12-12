@@ -1,6 +1,9 @@
 etckeeper module for puppet
 ===========================
 
+Use puppetlabs_spec_helper gem.
+Add spec tests.
+
 0.0.7
 -----
 Fixed support for Oracle Linux Server 6. - @sedden

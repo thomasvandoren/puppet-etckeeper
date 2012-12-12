@@ -5,10 +5,18 @@ etckeeper puppet module
 
 Install and configure etckeeper using git.
 
+Usage
+-----
+Installs etckeeper with git configuration.
+
+```puppet
+include etckeeper
+```
+
 Authors
 -------
 Thomas Van Doren
 
 License
 -------
-GPLv2
+BSD
