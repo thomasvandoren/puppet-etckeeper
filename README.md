@@ -13,6 +13,10 @@ Installs etckeeper with git configuration.
 include etckeeper
 ```
 
+Note that this module assumes the etckeeper package is available in
+one of the available package repos. You may need to add EPEL (or
+similar) on some EL distros.
+
 Authors
 -------
 Thomas Van Doren
