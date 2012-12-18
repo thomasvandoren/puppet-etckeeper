@@ -3,6 +3,7 @@ etckeeper module for puppet
 
 0.0.8
 -----
+Support Amazon Linux AMI.
 Use puppetlabs_spec_helper gem.
 Add spec tests.
 
