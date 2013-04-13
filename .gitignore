@@ -6,3 +6,4 @@
 # Build stuff.
 /pkg
 /metadata.json
+/.gemfile.lock
