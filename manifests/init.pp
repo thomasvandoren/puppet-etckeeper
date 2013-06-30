@@ -73,5 +73,12 @@ class etckeeper {
     cwd     => '/etc',
     creates => '/etc/.git',
     require => [ Package[$gitpackage], Package['etckeeper'], ],
+    notify  => [ Exec['etckeeper-initial-commit'], ],
+  }
+
+  exec { 'etckeeper-initial-commit':
+    command => 'etckeeper commit "initial commit with package install and configuration"',
+    path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+    cwd     => '/etc',
   }
 }
