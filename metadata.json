@@ -1,0 +1,12 @@
+{
+  "name": "thomasvandoren-etckeeper",
+  "version": "0.0.8",
+  "author": "Thomas Van Doren",
+  "summary": "Install and configure etckeeper using git.",
+  "license": "BSD",
+  "source": "git://github.com/thomasvandoren/puppet-etckeeper.git",
+  "project_page": "https://github.com/thomasvandoren/puppet-etckeeper",
+  "issues_url": "https://github.com/thomasvandoren/puppet-etckeeper/issues",
+  "description": "Install and configure etckeeper using git.",
+  "dependencies": []
+}
