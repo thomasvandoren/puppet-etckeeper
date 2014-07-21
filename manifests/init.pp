@@ -3,6 +3,16 @@
 # Configure and install etckeeper. Works for debian-like and
 # redhat-like systems.
 #
+# === Parameters
+#
+# [*etckeeper_author*]
+#   Author name to use when committing (user.name).
+#   Default: false (do not set)
+#
+# [*etckeeper_email*]
+#   Email to use when committing (user.email).
+#   Default: false (do not set)
+#
 # === Variables
 #
 # [*etckeeper_high_pkg_mgr*]
@@ -15,6 +25,13 @@
 #
 #   include etckeeper
 #
+# To set the author and email for git commits:
+#
+#   class { 'etckeeper':
+#     etckeeper_author => 'root',
+#     etckeeper_email  => "root@${::fqdn}",
+#   }
+#
 # === Authors
 #
 # Thomas Van Doren
@@ -23,7 +40,10 @@
 #
 # Copyright 2012, Thomas Van Doren, unless otherwise noted
 #
-class etckeeper {
+class etckeeper (
+  $etckeeper_author = false,
+  $etckeeper_email = false
+  ) {
   # HIGHLEVEL_PACKAGE_MANAGER config setting.
   $etckeeper_high_pkg_mgr = $::operatingsystem ? {
     /(?i-mx:ubuntu|debian)/                           => 'apt',
