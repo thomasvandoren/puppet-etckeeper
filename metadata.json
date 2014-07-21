@@ -1,6 +1,6 @@
 {
   "name": "thomasvandoren-etckeeper",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "author": "Thomas Van Doren",
   "summary": "Install and configure etckeeper using git.",
   "license": "BSD",

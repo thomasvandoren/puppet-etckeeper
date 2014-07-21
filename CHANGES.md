@@ -1,6 +1,11 @@
 etckeeper module for puppet
 ===========================
 
+0.0.9
+-----
+Update templates to support puppet 3.0. - @oc243
+Add class params for git commit author and email.
+
 0.0.8
 -----
 Support Amazon Linux AMI.
