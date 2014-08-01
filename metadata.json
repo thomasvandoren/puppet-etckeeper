@@ -8,5 +8,10 @@
   "project_page": "https://github.com/thomasvandoren/puppet-etckeeper",
   "issues_url": "https://github.com/thomasvandoren/puppet-etckeeper/issues",
   "description": "Install and configure etckeeper using git.",
-  "dependencies": []
+  "dependencies": [
+    {
+      "name": "puppetlabs-git",
+      "version_range": ">= 0.0.2"
+    },
+  ]
 }
