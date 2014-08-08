@@ -10,7 +10,7 @@
   "description": "Install and configure etckeeper using git.",
   "dependencies": [
     {
-      "name": "puppetlabs-git",
+      "name": "puppetlabs/git",
       "version_range": ">= 0.0.2"
     },
   ]
