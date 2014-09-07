@@ -13,6 +13,14 @@
 #   Email to use when committing (user.email).
 #   Default: false (do not set)
 #
+# [*etckeeper_repo*]
+#   URL of the repo to push commits to
+#   Default: undef (do not push commits)
+#
+# [*etckeeper_remote*]
+#   Name of the remote. Has no effect unless etckeeper_repo is set
+#   Default: origin
+#
 # === Variables
 #
 # [*etckeeper_high_pkg_mgr*]
@@ -42,7 +50,9 @@
 #
 class etckeeper (
   $etckeeper_author = false,
-  $etckeeper_email = false
+  $etckeeper_email  = false,
+  $etckeeper_repo   = false,
+  $etckeeper_remote = 'origin'
   ) {
   # HIGHLEVEL_PACKAGE_MANAGER config setting.
   $etckeeper_high_pkg_mgr = $::operatingsystem ? {
@@ -93,5 +103,15 @@ class etckeeper (
     cwd     => '/etc',
     creates => '/etc/.git',
     require => [ Package[$gitpackage], Package['etckeeper'], ],
+  }
+
+  if ( $etckeeper_repo ) {
+    exec { 'etckeeper-remoteadd':
+      command => "git remote add ${etckeeper_remote} ${etckeeper_repo}",
+      path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+      cwd     => '/etc',
+      unless  => "git remote | grep ${etckeeper_remote}",
+      require => Exec['etckeeper-init'],
+    }
   }
 }
