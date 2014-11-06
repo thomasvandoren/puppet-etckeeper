@@ -118,10 +118,11 @@ class etckeeper (
       #The etckeeper in Debian doesn't support automatic pushing, so need to do it with cron
       cron { 'etckeeper-push':
         ensure      => present,
-        command     => "git push ${etckeeper_remote}",
+        command     => "git push ${etckeeper_remote} -C /etc",
         environment => 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
         user        => 'root',
-        hour        => '*'
+        hour        => '*',
+        minute      => '0'
       }
     }
   }
