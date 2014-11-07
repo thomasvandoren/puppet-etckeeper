@@ -122,6 +122,7 @@ class etckeeper (
         group   => 'root',
         mode    => '0755',
         content => template('etckeeper/99push')
+      }
     }
   }
 }
