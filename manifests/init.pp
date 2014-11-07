@@ -115,15 +115,13 @@ class etckeeper (
     }
 
     if ($::operatingsystem == 'debian') {
-      #The etckeeper in Debian doesn't support automatic pushing, so need to do it with cron
-      cron { 'etckeeper-push':
-        ensure      => present,
-        command     => "git push ${etckeeper_remote} -C /etc",
-        environment => 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
-        user        => 'root',
-        hour        => '*',
-        minute      => '0'
-      }
+      #The etckeeper in Debian doesn't support automatic pushing, so need to monkeypatch
+      file { '/etc/etckeeper/commit.d/99push':
+        ensure  => present,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0755',
+        content => template('etckeeper/99push')
     }
   }
 }
