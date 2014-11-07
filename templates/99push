@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ "$VCS" = git ] && [ -d .git ]; then
+   git push <%= @etckeeper_remote %> master || true
+else
+   echo "PUSH_REMOTE not yet supported for $VCS" >&2
+fi
