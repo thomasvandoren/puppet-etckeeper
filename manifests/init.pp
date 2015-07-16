@@ -13,6 +13,10 @@
 #   Email to use when committing (user.email).
 #   Default: false (do not set)
 #
+# [*push_remote_name*]
+#   Automatic push to a remote branch after commit.
+#   Default: undef (do not push)
+#
 # === Variables
 #
 # [*etckeeper_high_pkg_mgr*]
@@ -42,7 +46,8 @@
 #
 class etckeeper (
   $etckeeper_author = false,
-  $etckeeper_email = false
+  $etckeeper_email = false,
+  $push_remote_name = false, 
   ) {
   # HIGHLEVEL_PACKAGE_MANAGER config setting.
   $etckeeper_high_pkg_mgr = $::operatingsystem ? {
