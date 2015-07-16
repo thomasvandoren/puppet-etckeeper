@@ -40,3 +40,11 @@ HIGHLEVEL_PACKAGE_MANAGER=<%= @etckeeper_high_pkg_mgr %>
 # The low-level package manager that's being used.
 # (dpkg, rpm, pacman-g2, etc)
 LOWLEVEL_PACKAGE_MANAGER=<%= @etckeeper_low_pkg_mgr %>
+
+# To push each commit to a remote, put the name of the remote here.
+# # (eg, "origin" for git).
+<% if $push_remote_name %>
+PUSH_REMOTE="<%= $push_remote_name %>"
+<% else %>
+#PUSH_REMOTE="origin"
+<% end %>
