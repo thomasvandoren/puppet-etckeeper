@@ -61,13 +61,7 @@ class etckeeper (
     /(?i-mx:centos|fedora|redhat|oraclelinux|amazon)/ => 'git',
   }
 
-  Package {
-    ensure => present,
-  }
-
-  if !defined(Package[$gitpackage]) {
-    package { $gitpackage: }
-  }
+  ensure_packages($gitpackage)
 
   package { 'etckeeper':
     require => [ Package[$gitpackage], File['etckeeper.conf'], ],
