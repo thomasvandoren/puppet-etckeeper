@@ -106,7 +106,8 @@ describe 'etckeeper', :type => 'class' do
     end # let
 
     it do
-      should contain_file('etckeeper.conf').with_content(/^GIT_COMMIT_OPTIONS="--author='Roger Rabbit <roger@marooncartoons.com>'"$/)
+      should contain_file('etckeeper.conf').with_content(/^GIT_AUTHOR_NAME="Roger Rabbit"$/)
+      should contain_file('etckeeper.conf').with_content(/^GIT_AUTHOR_EMAIL="roger@marooncartoons.com"$/)
     end # it
   end # context
 end # describe
