@@ -10,7 +10,8 @@ describe 'etckeeper', :type => 'class' do
     end # let
 
     it do
-      should contain_package('git-core').with_ensure('present')
+      should contain_class('git')
+
       should contain_package('etckeeper').with_ensure('present')
 
       should contain_file('/etc/etckeeper').with(:ensure => 'directory',
@@ -41,7 +42,8 @@ describe 'etckeeper', :type => 'class' do
     end # let
 
     it do
-      should contain_package('git').with_ensure('present')
+      should contain_class('git')
+
       should contain_package('etckeeper').with_ensure('present')
 
       should contain_file('/etc/etckeeper').with(:ensure => 'directory',
@@ -70,7 +72,7 @@ describe 'etckeeper', :type => 'class' do
     end # let
 
     it do
-      should contain_package('git-core').with_ensure('present')
+      should contain_class('git')
       should contain_file('etckeeper.conf').with_content(/^HIGHLEVEL_PACKAGE_MANAGER=apt$/)
       should contain_file('etckeeper.conf').with_content(/^LOWLEVEL_PACKAGE_MANAGER=dpkg$/)
     end # it
@@ -84,7 +86,7 @@ describe 'etckeeper', :type => 'class' do
     end # let
 
     it do
-      should contain_package('git').with_ensure('present')
+      should contain_class('git')
       should contain_file('etckeeper.conf').with_content(/^HIGHLEVEL_PACKAGE_MANAGER=yum$/)
       should contain_file('etckeeper.conf').with_content(/^LOWLEVEL_PACKAGE_MANAGER=rpm$/)
     end # it
@@ -104,7 +106,8 @@ describe 'etckeeper', :type => 'class' do
     end # let
 
     it do
-      should contain_file('etckeeper.conf').with_content(/^GIT_COMMIT_OPTIONS="--author='Roger Rabbit <roger@marooncartoons.com>'"$/)
+      should contain_file('etckeeper.conf').with_content(/^GIT_AUTHOR_NAME="Roger Rabbit"$/)
+      should contain_file('etckeeper.conf').with_content(/^GIT_AUTHOR_EMAIL="roger@marooncartoons.com"$/)
     end # it
   end # context
 end # describe

@@ -13,6 +13,15 @@ Installs etckeeper with git configuration.
 include etckeeper
 ```
 
+to specify the author and author-email, use:
+```puppet
+class { 'etckeeper':
+        etckeeper_author        =>      "etckeeper",
+        etckeeper_email         =>      "etckeeper@example.net",
+}
+```
+
+
 Note that this module assumes the etckeeper package is available in
 one of the available package repos. You may need to add EPEL (or
 similar) on some EL distros.

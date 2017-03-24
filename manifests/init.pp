@@ -44,6 +44,9 @@ class etckeeper (
   $etckeeper_author = false,
   $etckeeper_email = false
   ) {
+
+  require ::git
+
   # HIGHLEVEL_PACKAGE_MANAGER config setting.
   $etckeeper_high_pkg_mgr = $::operatingsystem ? {
     /(?i-mx:ubuntu|debian)/                           => 'apt',
@@ -56,21 +59,12 @@ class etckeeper (
     /(?i-mx:centos|fedora|redhat|oraclelinux|amazon)/ => 'rpm',
   }
 
-  $gitpackage = $::operatingsystem ? {
-    /(?i-mx:ubuntu|debian)/                           => 'git-core',
-    /(?i-mx:centos|fedora|redhat|oraclelinux|amazon)/ => 'git',
-  }
-
   Package {
     ensure => present,
   }
 
-  if !defined(Package[$gitpackage]) {
-    package { $gitpackage: }
-  }
-
   package { 'etckeeper':
-    require => [ Package[$gitpackage], File['etckeeper.conf'], ],
+    require => File['etckeeper.conf'],
   }
 
   file { '/etc/etckeeper':
@@ -92,6 +86,6 @@ class etckeeper (
     path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
     cwd     => '/etc',
     creates => '/etc/.git',
-    require => [ Package[$gitpackage], Package['etckeeper'], ],
+    require => Package['etckeeper'],
   }
 }
